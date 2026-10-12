@@ -7,13 +7,16 @@ import {
   MaxLength,
   IsInt,
   IsArray,
-  Validate,
   ValidateNested,
   IsOptional,
+  ArrayMinSize,
+  ArrayMaxSize
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class billsDtoParams {
-  @IsNumber()
+  @Type(() => Number)
+  @IsInt()
   @IsNotEmpty()
   @Min(2)
   @Max(20)
@@ -40,11 +43,14 @@ export class ItemDto {
 export class billsDtoBody {
   @IsArray()
   @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @ArrayMaxSize(30)
+  @Type(() => ItemDto)
   items: ItemDto[];
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(30)
-  tipPercent: number = 0;
+  tipPercent?: number = 0;
 }

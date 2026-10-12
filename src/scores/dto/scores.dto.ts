@@ -2,10 +2,10 @@ import { IsNotEmpty, IsNumber, Min, Max, IsOptional, ArrayMinSize, ArrayMaxSize,
 
 export class scoresDto {
     @IsNumber()
-    @IsNotEmpty()
-    passmark: number;
-
     @IsOptional()
+    passMark?: number;
+
+    @IsNotEmpty()
     @IsArray()
     @ArrayMinSize(1)
     @ArrayMaxSize(20)

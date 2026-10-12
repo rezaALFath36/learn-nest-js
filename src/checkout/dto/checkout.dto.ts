@@ -1,7 +1,12 @@
 import { IsBoolean, IsOptional, IsString, IsIn, IsArray, IsNotEmpty, IsNumber, ArrayMinSize, ArrayMaxSize, ValidateNested, MinLength, MaxLength, Min, IsInt } from "class-validator";
-
+import { Transform, Type } from "class-transformer";
 export class checkoutDtoQuery{
     @IsOptional()
+    @Transform(({ value }) => {
+        if (value === 'true' || value === true) return true;
+        if (value === 'false' || value === false) return false;
+        return value;
+    })
     @IsBoolean()
     member? : boolean = false;
 
@@ -25,7 +30,7 @@ export class ItemsDto{
 
     @IsNotEmpty()
     @IsInt()
-    @Min(0)
+    @Min(1)
     qty: number
 }
 
@@ -35,5 +40,6 @@ export class CheckoutDtoBody{
     @ArrayMinSize(1)
     @ArrayMaxSize(20)
     @ValidateNested({each: true})
+    @Type(() => ItemsDto)
     items: ItemsDto[]
 }

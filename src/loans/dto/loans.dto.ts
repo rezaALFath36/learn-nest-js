@@ -1,7 +1,9 @@
 import { IsNotEmpty, IsNumber, Min, Max, IsOptional, IsIn, IsString, IsInt } from "class-validator";
+import { Type } from 'class-transformer';
 
 export class LoansDtoParams{
     @IsNotEmpty()
+    @Type(() => Number)
     @IsNumber()
     @Min(1000000)
     @Max(1000000000)

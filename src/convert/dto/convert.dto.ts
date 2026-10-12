@@ -1,6 +1,8 @@
 import { IsNotEmpty, IsNumber, Max, Min } from "class-validator";
+import { Type } from "class-transformer";
 
 export class convertDto{
+    @Type(() => Number)
     @IsNotEmpty()
     @IsNumber()
     @Min(0)

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, Min, Max, IsOptional, IsBoolean } from "class-validator";
-
+import { Transform } from "class-transformer";
 export class taxDto{
     @IsNotEmpty()
     @IsNumber()
@@ -13,6 +13,11 @@ export class taxDto{
     rate: number
 
     @IsOptional()
+    @Transform(({ value }) => {
+        if (value === 'true' || value === true) return true;
+        if (value === 'false' || value === false) return false;
+        return value;
+    })
     @IsBoolean()
     inclusive?: boolean
 }

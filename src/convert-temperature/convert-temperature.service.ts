@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { ConvertTempDtoParams, ConvertTempDtoQuery } from './dto/convert-temperature.dto.js';
 
 @Injectable()
@@ -6,6 +6,10 @@ export class ConvertTemperatureService {
     convertTemperature(params: ConvertTempDtoParams, query: ConvertTempDtoQuery){
         let {value} = params
         let {from, to} = query
+
+        if (from === to) {
+            throw new BadRequestException("The 'to' unit must be different from the 'from' unit.");
+        }
 
         let celcius: number = 0;
         switch (from) {

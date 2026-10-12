@@ -30,7 +30,7 @@ export class ShippingService {
                 baseFare = 20000
             break;
             default:
-                throw new NotFoundException('Unsupported City')
+                throw new NotFoundException()
         }
 
         let volumetricKg = Number(((dimension.lengthCm * dimension.widthCm * dimension.heightCm) / 5000).toFixed(1));

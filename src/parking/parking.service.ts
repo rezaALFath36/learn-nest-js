@@ -8,7 +8,6 @@ export class ParkingService {
         const {vehicle, weekend = false} = query
 
         const billedHours = Math.ceil(hours);
-        const isWeekend  = String(weekend) === 'true';
 
         let hourlyRate: number;
 
@@ -26,9 +25,9 @@ export class ParkingService {
         hourlyRate = 0;
         }
 
-        const weekendSurcharge = isWeekend ? 0.2 : 0
-        const multiplier = isWeekend ? 1.2 : 1;
-        const total = billedHours * hourlyRate * multiplier
+        const weekendSurcharge = weekend ? 0.2 : 0
+        const multiplier = weekend ? 1.2 : 1;
+        const total =  Math.round(billedHours * hourlyRate * multiplier)
 
         return {
             success: true,

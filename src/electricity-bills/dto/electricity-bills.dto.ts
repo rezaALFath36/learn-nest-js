@@ -3,6 +3,7 @@ import { Type } from "class-transformer"
 
 export class MeterDto{
     @IsNotEmpty()
+    @Type(() => Number)
     @IsNumber()
     @Min(0)
     previousKwh: number
@@ -14,17 +15,20 @@ export class MeterDto{
 }
 
 export class RatesDto{
+    @Type(() => Number)
     @IsNotEmpty()
     @IsNumber()
     @Min(0)
     baseFee: number
 
+    @Type(() => Number)
     @IsNotEmpty()
     @IsNumber()
     @Min(0)
     perKwh: number
 
     @IsOptional()
+    @Type(() => Number)
     @IsNumber()
     @Min(0)
     @Max(20)

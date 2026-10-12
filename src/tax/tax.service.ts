@@ -6,7 +6,7 @@ export class TaxService {
     calculateTax(dto : taxDto){
         let amount = dto.amount
         let rate = dto.rate
-        let inclusive = dto?.inclusive || false
+        let inclusive = dto.inclusive ?? false
         let tax = dto.amount * dto.rate
         let net = dto.amount
         let gross = dto.amount + tax
@@ -24,8 +24,8 @@ export class TaxService {
                 amount: amount,
                 rate: rate,
                 inclusive: inclusive,
-                tax: tax,
-                net: net,
+                tax: Number(tax.toFixed(2)),
+                net: Number(net.toFixed(2)),
                 gross: gross
             }
         }
